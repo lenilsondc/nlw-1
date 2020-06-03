@@ -15,4 +15,39 @@ routes.get("/items", async (_, res) => {
   return res.json(mapedItems);
 });
 
+routes.post("/points", async (req, res) => {
+  const {
+    name,
+    email,
+    whatsapp,
+    latitude,
+    longitude,
+    city,
+    state,
+    items,
+  } = req.body;
+
+  const trx = await knex.transaction();
+
+  const [point_id] = await trx("points").insert({
+    image: "",
+    name,
+    email,
+    whatsapp,
+    latitude,
+    longitude,
+    city,
+    state,
+  });
+
+  const pointItems = items.map((item_id: number) => ({
+    item_id,
+    point_id,
+  }));
+
+  await trx("point-items").insert(pointItems);
+
+  return res.json({ succes: true });
+});
+
 export default routes;
