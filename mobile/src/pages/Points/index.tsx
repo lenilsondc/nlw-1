@@ -1,12 +1,105 @@
 import React from "react";
+import Constants from "expo-constants";
 import { Feather as Icon } from "@expo/vector-icons";
 import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import {
+  RectButton,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import MapView, { Marker } from "react-native-maps";
+import { SvgUri } from "react-native-svg";
 
-const Points = () => <Text>Points</Text>;
+const Points = () => {
+  const { goBack, navigate } = useNavigation();
+
+  function handleNavigateToDetail() {
+    navigate("Detail");
+  }
+
+  return (
+    <>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={goBack}>
+          <Icon name="arrow-left" color="#34cb79" size={20} />
+        </TouchableOpacity>
+
+        <Text style={styles.title}>Wellcome!</Text>
+        <Text style={styles.description}>
+          Find a collection point on the map.
+        </Text>
+
+        <View style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: -22.5461407,
+              longitude: -48.6357348,
+              latitudeDelta: 0.014,
+              longitudeDelta: 0.014,
+            }}
+          >
+            <Marker
+              style={styles.mapMarker}
+              onPress={handleNavigateToDetail}
+              coordinate={{
+                latitude: -22.5461407,
+                longitude: -48.6357348,
+              }}
+            >
+              <View style={styles.mapMarkerContainer}>
+                <Image
+                  style={styles.mapMarkerImage}
+                  source={{
+                    uri:
+                      "https://images.unsplash.com/photo-1540661116512-12e516d30ce4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
+                  }}
+                />
+                <Text style={styles.mapMarkerTitle}>Market</Text>
+              </View>
+            </Marker>
+          </MapView>
+        </View>
+
+        <View style={styles.itemsContainer}>
+          <ScrollView
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            <TouchableOpacity style={styles.item}>
+              <SvgUri
+                width={42}
+                height={42}
+                uri="http://192.168.0.111:3333/assets/lamps.svg"
+              />
+              <Text style={styles.itemTitle}>Lamps</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
+              <SvgUri
+                width={42}
+                height={42}
+                uri="http://192.168.0.111:3333/assets/lamps.svg"
+              />
+              <Text style={styles.itemTitle}>Lamps</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
+              <SvgUri
+                width={42}
+                height={42}
+                uri="http://192.168.0.111:3333/assets/lamps.svg"
+              />
+              <Text style={styles.itemTitle}>Lamps</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </View>
+    </>
+  );
+};
 
 export default Points;
-const Constants: any = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
