@@ -1,7 +1,13 @@
 import React from "react";
-import Constants from "expo-constants";
 import { Feather as Icon } from "@expo/vector-icons";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
 import {
   RectButton,
   TouchableOpacity,
@@ -19,7 +25,7 @@ const Points = () => {
   }
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <TouchableOpacity onPress={goBack}>
           <Icon name="arrow-left" color="#34cb79" size={20} />
@@ -95,7 +101,7 @@ const Points = () => {
           </ScrollView>
         </View>
       </View>
-    </>
+    </SafeAreaView>
   );
 };
 
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 32,
-    paddingTop: 20 + Constants.statusBarHeight,
+    paddingTop: 20,
   },
 
   title: {
