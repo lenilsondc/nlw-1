@@ -1,18 +1,7 @@
 import React from "react";
 import { Feather as Icon } from "@expo/vector-icons";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  SafeAreaView,
-} from "react-native";
-import {
-  RectButton,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native-gesture-handler";
+import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { SvgUri } from "react-native-svg";
