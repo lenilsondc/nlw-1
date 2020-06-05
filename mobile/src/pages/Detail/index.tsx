@@ -1,9 +1,51 @@
 import React from "react";
-import { Feather as Icon } from "@expo/vector-icons";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { FontAwesome, Feather as Icon } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Detail = () => <Text>Detail</Text>;
+const Detail = () => {
+  const { goBack } = useNavigation();
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={goBack}>
+          <Icon name="arrow-left" color="#34cb79" size={20} />
+        </TouchableOpacity>
+
+        <Image
+          style={styles.pointImage}
+          source={{
+            uri:
+              "https://images.unsplash.com/photo-1540661116512-12e516d30ce4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
+          }}
+        />
+
+        <Text style={styles.pointName}>Market</Text>
+        <Text style={styles.pointItems}>Lamps, Oils, Papper</Text>
+
+        <View style={styles.address}>
+          <Text style={styles.addressTitle}>Address</Text>
+          <Text style={styles.addressContent}>Street test</Text>
+        </View>
+      </View>
+
+      <View style={styles.footer}>
+        <RectButton style={styles.button}>
+          <FontAwesome name="whatsapp" size={20} color="#fff" />
+          <Text style={styles.buttonText}>Whatsapp</Text>
+        </RectButton>
+
+        <RectButton style={styles.button}>
+          <Icon name="mail" size={20} color="#fff" />
+          <Text style={styles.buttonText}>Email</Text>
+        </RectButton>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default Detail;
 
