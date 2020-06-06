@@ -2,6 +2,9 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import { errors } from "celebrate";
+import { config as configDotenv } from "dotenv";
+
+configDotenv();
 
 import routes from "./routes";
 
