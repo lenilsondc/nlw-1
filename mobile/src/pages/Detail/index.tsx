@@ -14,7 +14,7 @@ interface RouteParams {
 
 interface PointData {
   name: string;
-  image: string;
+  image_url: string;
   email: string;
   whatsapp: string;
   city: string;
@@ -64,7 +64,7 @@ const Detail = () => {
         <Image
           style={styles.pointImage}
           source={{
-            uri: pointData.image,
+            uri: pointData.image_url,
           }}
         />
 
