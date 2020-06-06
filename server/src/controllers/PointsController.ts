@@ -20,7 +20,7 @@ class PointsController {
 
     const serializedPoints = points.map((point) => ({
       ...point,
-      image_url: `http://192.168.0.111:3333/assets/${point.image}`,
+      image_url: `${process.env.SERVER_URL}/assets/${point.image}`,
     }));
 
     return res.json(serializedPoints);
@@ -42,7 +42,7 @@ class PointsController {
 
     const serializedPoint = {
       ...point,
-      image_url: `http://192.168.0.111:3333/assets/${point.image}`,
+      image_url: `${process.env.SERVER_URL}/assets/${point.image}`,
     };
 
     return res.json({ ...serializedPoint, items });
