@@ -115,3 +115,15 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Project ignores
+
+*.sqlite
+
+assets/*
+!assets/batteries.svg
+!assets/eletronics.svg
+!assets/lamps.svg
+!assets/oils.svg
+!assets/organics.svg
+!assets/pappers.svg
