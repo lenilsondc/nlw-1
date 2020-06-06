@@ -8,6 +8,7 @@ import axios from "axios";
 import "./styles.css";
 import logo from "../../assets/logo.svg";
 import api from "../../services/api";
+import Dropzone from "../../components/Dropzone";
 
 interface Item {
   id: number;
@@ -32,6 +33,7 @@ const CreatePoint: React.FC = () => {
     whatsapp: "",
   });
 
+  const [selectedFile, setSelectedFile] = useState<File>();
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -91,18 +93,22 @@ const CreatePoint: React.FC = () => {
     const [latitude, longitude] = selectedPosition;
     const items = selectedItems;
 
-    const point = {
-      name,
-      email,
-      whatsapp,
-      city,
-      state,
-      latitude,
-      longitude,
-      items,
-    };
+    const data = new FormData();
 
-    await api.post("points", point);
+    data.append("name", name);
+    data.append("email", email);
+    data.append("whatsapp", whatsapp);
+    data.append("city", city);
+    data.append("state", state);
+    data.append("latitude", String(latitude));
+    data.append("longitude", String(longitude));
+    data.append("items", items.join(","));
+
+    if (selectedFile) {
+      data.append("image", selectedFile);
+    }
+
+    await api.post("points", data);
 
     alert("Collection point successfully registered!");
 
@@ -138,6 +144,8 @@ const CreatePoint: React.FC = () => {
           <br />
           registration
         </h1>
+
+        <Dropzone onSelectFile={setSelectedFile} />
 
         <fieldset>
           <legend>
