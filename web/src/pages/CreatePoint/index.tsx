@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiCheckCircle } from "react-icons/fi";
 import { Map, TileLayer, Marker } from "react-leaflet";
 import { LeafletMouseEvent } from "leaflet";
 import axios from "axios";
@@ -41,6 +41,8 @@ const CreatePoint: React.FC = () => {
     0,
     0,
   ]);
+
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const history = useHistory();
 
@@ -110,9 +112,7 @@ const CreatePoint: React.FC = () => {
 
     await api.post("points", data);
 
-    alert("Collection point successfully registered!");
-
-    history.push("/");
+    setShowSuccessModal(true);
   }
 
   function handleSelectItem({ id }: Item) {
@@ -125,6 +125,10 @@ const CreatePoint: React.FC = () => {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
+  }
+
+  function handleNavigateHome() {
+    history.push("/");
   }
 
   return (
@@ -267,6 +271,18 @@ const CreatePoint: React.FC = () => {
 
         <button type="submit">Register collection point</button>
       </form>
+
+      {showSuccessModal && (
+        <div className="modal">
+          <FiCheckCircle color="#34cb79" size={30} />
+          <p className="modal-text">
+            Collection point successfully registered!
+          </p>
+          <button className="modal-button" onClick={handleNavigateHome}>
+            Go Home
+          </button>
+        </div>
+      )}
     </div>
   );
 };
